@@ -2,6 +2,14 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 jaccard_coeff <- function(idx) {
-    .Call('_Rphenograph_jaccard_coeff', PACKAGE = 'Rphenograph', idx)
+    .Call(`_Rphenograph_jaccard_coeff`, idx)
+}
+
+jaccard_coeff_1 <- function(idx) {
+    .Call(`_Rphenograph_jaccard_coeff_1`, idx)
+}
+
+jaccard_coeff_3 <- function(idx) {
+    .Call(`_Rphenograph_jaccard_coeff_3`, idx)
 }
 
