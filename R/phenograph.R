@@ -49,6 +49,7 @@
 #'     cex=c(2.5, 2, 1.5)[phenograph_cluster]))
 #' }
 #' 
+#' @importFrom Matrix t
 #' @importFrom igraph graph.data.frame cluster_louvain modularity membership as_adjacency_matrix graph_from_adjacency_matrix
 #' @useDynLib Rphenograph
 #' 

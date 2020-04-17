@@ -2,6 +2,7 @@
 
 export(Rphenograph)
 export(find_neighbors)
+importFrom(Matrix,t)
 importFrom(RANN,nn2)
 importFrom(Rcpp,sourceCpp)
 importFrom(igraph,as_adjacency_matrix)
