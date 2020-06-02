@@ -18,7 +18,7 @@ To install the latest version from the github repository, use:
 if(!require(devtools)){
   install.packages("devtools") # If not already installed
 }
-devtools::install_github("JinmiaoChenLab/Rphenograph")
+devtools::install_github("i-cyto/Rphenograph")
 ```
 
 
