@@ -38,11 +38,24 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// jaccard_coeff_4
+NumericMatrix jaccard_coeff_4(NumericMatrix idx, IntegerVector ks);
+RcppExport SEXP _Rphenograph_jaccard_coeff_4(SEXP idxSEXP, SEXP ksSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type idx(idxSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type ks(ksSEXP);
+    rcpp_result_gen = Rcpp::wrap(jaccard_coeff_4(idx, ks));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_Rphenograph_jaccard_coeff", (DL_FUNC) &_Rphenograph_jaccard_coeff, 1},
     {"_Rphenograph_jaccard_coeff_1", (DL_FUNC) &_Rphenograph_jaccard_coeff_1, 1},
     {"_Rphenograph_jaccard_coeff_3", (DL_FUNC) &_Rphenograph_jaccard_coeff_3, 1},
+    {"_Rphenograph_jaccard_coeff_4", (DL_FUNC) &_Rphenograph_jaccard_coeff_4, 2},
     {NULL, NULL, 0}
 };
 

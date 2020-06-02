@@ -13,3 +13,7 @@ jaccard_coeff_3 <- function(idx) {
     .Call(`_Rphenograph_jaccard_coeff_3`, idx)
 }
 
+jaccard_coeff_4 <- function(idx, ks) {
+    .Call(`_Rphenograph_jaccard_coeff_4`, idx, ks)
+}
+

@@ -1,3 +1,4 @@
+wip*.R
 Rphenograph_iris_cluster.png
 ^appveyor\.yml$
 ^\.travis\.yml$

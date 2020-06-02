@@ -1,6 +1,6 @@
 Package: Rphenograph
 Title: R implementation of the phenograph algorithm
-Version: 0.99.1.9002
+Version: 0.99.1.9003
 Authors@R: c(
                person("Hao","Chen",middle=NULL,email="chen_hao@immunol.a-star.edu.sg",role="cre"),	
                person("Tom","Kelly",middle=NULL,email="tom.kelly@riken.jp",role="ctb"),	
@@ -22,14 +22,16 @@ Depends:
 Imports:
     igraph (>= 1.0.1),
     RANN (>= 2.5),
-    Rcpp (>= 0.12.0),
-    Matrix
+    Rcpp (>= 0.12.0)
 LinkingTo: Rcpp
 Suggests:
     RcppHNSW,
-    ggplot2,
     testthat,
-    covr
+    covr,
+    knitr,
+    rmarkdown,
+    ggplot2
 License: Artistic-2.0
 Encoding: UTF-8
 RoxygenNote: 7.1.0
+VignetteBuilder: knitr
