@@ -2,11 +2,10 @@ Package: Rphenograph
 Title: R implementation of the phenograph algorithm
 Version: 0.99.1.9003
 Authors@R: c(
-               person("Hao","Chen",middle=NULL,email="chen_hao@immunol.a-star.edu.sg",role="cre"),	
-               person("Tom","Kelly",middle=NULL,email="tom.kelly@riken.jp",role="ctb"),	
-               person("Etienne","Becht",middle=NULL,email="etienne.becht@protonmail.com",role="ctb")
-       )
-Maintainer: Hao Chen <chen_hao@immunol.a-star.edu.sg>
+    person("Hao","Chen", role="aut"),
+    person("S. Thomas","Kelly", role="ctb"),
+    person("Etienne K.", "Becht", role="ctb"),
+    person("Samuel", "Granjeaud", email = "samuel.granjeaud@inserm.fr", role = c("aut", "cre")))
 Description: A simple R implementation of the phenograph [PhenoGraph](http://
     www.cell.com/cell/abstract/S0092-8674(15)00637-6) algorithm, which is a
     clustering method designed for high-dimensional single-cell data analysis.
@@ -15,8 +14,8 @@ Description: A simple R implementation of the phenograph [PhenoGraph](http://
     sets, and then identifying communities using the well known ["Louvain method"]
     (https://sites.google.com/site/findcommunities/) in this graph.
     H. Chen created and published this package.
-    T. Kelly added pruning, graphs clustering methods.
-    E. Becht added approximate HNSW for speed.
+    S. Thomas Kelly added pruning and graphs clustering methods.
+    Etienne K. Becht added approximate HNSW nearest neighbors for speed.
 Depends:
     R (>= 2.10.0)
 Imports:

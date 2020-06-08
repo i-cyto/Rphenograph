@@ -214,7 +214,7 @@ NumericMatrix jaccard_coeff_4(NumericMatrix idx, IntegerVector ks) {
     delete [] i_idx[0];
     delete [] i_idx;
     delete [] kx;
-    // report all nodes (E. Becht's issue)
+    // report all nodes (E.K. Becht's issue)
     unsigned long int *reported = new unsigned long int[nrow+1];  // using R indices, 0 unused
     for (int i = 1; i <= nrow; i++)
         reported[i] = 0;
