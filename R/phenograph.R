@@ -131,7 +131,7 @@ Rphenograph <- function(data, k=30,
     if(is.null(knn_fun)) knn_fun <- find_neighbors
     if(is.character(knn_fun) && knn_fun == "hnsw")
       if (requireNamespace("RcppHNSW",  quietly = TRUE)) {
-        knn_fun <- function(data, k) RcppHNSW::hnsw_knn(data, k=k+1)$idx
+        knn_fun <- function(data, k) RcppHNSW::hnsw_knn(data, k=k)$idx
       } else
         stop("RcppHNSW must be installed for using hnsw nearest neighbors search.")
     if(!is.function(knn_fun))
