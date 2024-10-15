@@ -12,6 +12,13 @@ A simple R implementation of the [PhenoGraph](http://www.cell.com/cell/abstract/
 
 ### Installation
 
+To install the latest version for Windows from binary (no compilation, no Rtools), use:
+
+``` r
+install.packages("https://github.com/i-cyto/Rphenograph/releases/download/Rphenograph_0.99.1.9004/Rphenograph_0.99.1.9004.zip", repos = NULL, type = "win.binary")
+```
+
+
 To install the latest version from the github repository, use:
 
 ``` r
