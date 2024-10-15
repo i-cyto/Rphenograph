@@ -1,6 +1,6 @@
 Package: Rphenograph
 Title: R implementation of the phenograph algorithm
-Version: 0.99.1.9003
+Version: 0.99.1.9004
 Authors@R: c(
     person("Hao","Chen", role="aut"),
     person("S. Thomas","Kelly", role="ctb"),
@@ -17,7 +17,7 @@ Description: A simple R implementation of the phenograph [PhenoGraph](http://
     S. Thomas Kelly added pruning and graphs clustering methods.
     Etienne K. Becht added approximate HNSW nearest neighbors for speed.
 Depends:
-    R (>= 2.10.0)
+    R (>= 4.3.0)
 Imports:
     igraph (>= 1.0.1),
     RANN (>= 2.5),
@@ -32,5 +32,5 @@ Suggests:
     ggplot2
 License: Artistic-2.0
 Encoding: UTF-8
-RoxygenNote: 7.1.0
+RoxygenNote: 7.3.2
 VignetteBuilder: knitr
