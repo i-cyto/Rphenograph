@@ -48,9 +48,10 @@ cluster_leading_eigen, cluster_edge_betweenness, cluster_fast_greedy, cluster_la
 \item{verbose}{logical; verbosity (default=FALSE)}
 
 \item{knn_fun}{function or character; the function used to search the nearest neighbors. NULL
-points to RANN::nn2 as original code. "hnsw" points to RcppHNSW::hnsw_knn as proposed by E.
-Becht. Any function that returns a matrix of index to nearest neighbors could be used. NB: the
-first column contains the point itself and is removed before building the graph.}
+points to RANN::nn2 as original code, which is configured for exact nearest neighbours (eps=0).
+"hnsw" points to RcppHNSW::hnsw_knn as proposed by E. Becht. Any function that returns a matrix
+of index to nearest neighbors could be used. NB: the first column contains the point itself and
+is removed before building the graph unless inc_self is TRUE.}
 
 \item{knn_report}{vector of integers; this vector defines the indices within the k nearest
 neighbours to report for each data points. This should be a vector of integer from 1 to k. A
@@ -59,16 +60,25 @@ default.}
 }
 \value{
 a list contains an igraph graph object for \code{graph_from_data_frame} and a communities
-  object, the operations of this class contains: \item{print}{returns the communities object
-  itself, invisibly.} \item{length}{returns an integer scalar.} \item{sizes}{returns a numeric
-  vector.} \item{membership}{returns a numeric vector, one number for each vertex in the graph
-  that was the input of the community detection.} \item{modularity}{returns a numeric scalar.}
-  \item{algorithm}{returns a character scalar.} \item{crossing}{returns a logical vector.}
-  \item{is_hierarchical}{returns a logical scalar.} \item{merges}{returns a two-column numeric
-  matrix.} \item{cut_at}{returns a numeric vector, the membership vector of the vertices.}
-  \item{as.dendrogram}{returns a dendrogram object.} \item{show_trace}{returns a character
-  vector.} \item{code_len}{returns a numeric scalar for communities found with the InfoMAP method
-  and NULL for other methods.} \item{plot}{for communities objects returns NULL, invisibly.}
+  object, for which the most interesting operations are the following:
+
+  \item{membership}{returns a numeric vector, one number for each vertex in the graph that was
+  the input of the community detection.}
+
+  \item{length}{returns an integer scalar.}
+
+  \item{sizes}{returns a numeric vector.}
+
+  \item{modularity}{returns a numeric scalar.}
+
+  There are also other operations: \item{algorithm}{returns a character scalar.},
+  \item{crossing}{returns a logical vector.} \item{is_hierarchical}{returns a logical scalar.},
+  \item{merges}{returns a two-column numeric matrix.}, \item{cut_at}{returns a numeric vector,
+  the membership vector of the vertices.}, \item{as.dendrogram}{returns a dendrogram object.},
+  \item{show_trace}{returns a character vector.}, \item{code_len}{returns a numeric scalar for
+  communities found with the InfoMAP method and NULL for other methods.}, \item{print}{returns
+  the communities object itself, invisibly.}, \item{plot}{for communities objects returns NULL,
+  invisibly.}
 
 a n-by-k matrix of neighbor indices
 }
@@ -85,23 +95,22 @@ graph ("network") representing phenotypic similarities between cells by calclati
 coefficient between nearest-neighbor sets, and then identifying communities using the well known
 [Louvain method](https://sites.google.com/site/findcommunities/) in this graph.
 
-There is no rational whether to include or not to include the data point itself in the
-  list of nearest neighbours. Whatever the choice, the graph could be assymmetric when a point A
-  lists B as its k NN, but B does not, because B has k neighbours nearest than A. So A has a link
-  to B, but B has not link to A. When A and B are in the list of each other, there are two
-  reverse links, and they have the same intersection and the same Jaccard coefficient. When
-  inc_self is TRUE, only one link is kept, and the graph is defined undirected. When inc_self is
-  FALSE,
 
-  The Python Phenograph algorithm defines a "prune" parameter. prune is a logical that determines
-  whether the graph is simplified (i.e. removing reciprocal edges) by addition (FALSE) or
-  multiplication (TRUE) (defaults:FALSE). Originally, the Rphenograp code does not simplify the
-  graph, keeping reciprocal edges whereas the Phenograph Python code is implifying the graph. The
-  Python code is using matrix operations instead of igraph functions, which might lead to
-  different results for the multiplication simplification. prune seems to feature the sum (FALSE)
-  or the product (TRUE), but it's hard to understand what's happening when a link exists in one
-  direction only as the original Python code uses adjency matrix operations (so, does product
-  lead to 0 when there is only one link?).
+
+The Python Phenograph algorithm defines a "prune" parameter. prune is a logical that determines
+whether the graph is simplified (i.e. removing reciprocal edges) by addition (FALSE, default) or
+multiplication (TRUE). Phenograph is using matrix operations, adjacency matrix of the graph added
+or multiplied to its transpose. Originally, Rphenograph does not simplify the graph, keeping
+reciprocal edges. Now Rphenograph offers igraph simplifications, which might lead to different
+results from Phenograph. In Phenograph, it's not clear what's happening when a link exists in one
+direction: does product lead to 0 when there is only one link?
+
+There is no rational whether to include or not to the data point itself in the list of nearest
+neighbours. Phenograph does not, but the scran package does. The choice is driven here by
+\code{inc_self}. Whatever the choice, the graph could be assymmetric when a point A lists B as
+its k NN, but B does not, because B has k neighbours nearer than A. So A has a link to B, but B
+has not link to A. When A and B are in the list of each other, there are two reverse links; A and
+B have the same intersection and thus the same Jaccard coefficient.
 
 Use the nn2 function from the RANN package, utilizes the Approximate Near Neighbor (ANN) C++ library, 
 which can give the exact near neighbours or (as the name suggests) approximate near neighbours 
@@ -110,9 +119,9 @@ visit http://www.cs.umd.edu/~mount/ANN/.
 }
 \section{Functions}{
 \itemize{
-\item \code{find_neighbors}: Uses a kd-tree to find the p number of near neighbours for each point in an input/output dataset.
-}}
+\item \code{find_neighbors()}: Uses a kd-tree to find the p number of near neighbours for each point in an input/output dataset.
 
+}}
 \examples{
 library(igraph)
 iris_unique <- unique(iris) # Remove duplicates
